@@ -12,9 +12,8 @@ import web.service.UserServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        ApplicationContext applicationContext =
-                new AnnotationConfigApplicationContext(WebConfig.class);
+        ApplicationContext applicationContext =new AnnotationConfigApplicationContext(WebConfig.class);
 
-        System.out.println(applicationContext.getBean(UserServiceImpl.class).index());
+        UserDAO user = applicationContext.getBean(UserDAOImpl.class);
     }
 }

@@ -19,6 +19,7 @@
     <th scope="col">Age</th>
     <th scope="col">Email</th>
     <th scope="col">Address</th>
+    <th scope="col">Operations</th>
   </tr>
   </thead>
   <tbody>
@@ -30,7 +31,7 @@
     <td th:text="${person.getAddress()}"/>
 
     <td>
-      <a th:href="@{users/{id}/edit (id = ${person.getId()})}">
+      <a th:href="@{users/edit/{id} (id = ${person.getId()})}">
         <input type="button" value="Edit"/>
       </a>
       <a th:method="DELETE" th:href="@{users/deleteUser/{id}(id = ${person.getId()})}">

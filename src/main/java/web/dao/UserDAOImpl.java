@@ -34,8 +34,8 @@ public class UserDAOImpl implements UserDAO {
     }
     @Transactional
     @Override
-    public void update(int id, User updatedUser) {
-        User user = entityManager.find(User.class, id);
+    public void update(int id,User updatedUser) {
+        User user = show(id);
 
         user.setName(updatedUser.getName());
         user.setLastName(updatedUser.getLastName());

@@ -37,14 +37,14 @@ public class UserController {
         userService.save(user);
         return "redirect:/users";
     }
-    @GetMapping("/{id}/edit")
+    @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") int id){
         model.addAttribute("user", userService.show(id));
         return "editor";
     }
-    @GetMapping("/{id}/update")
+    @PostMapping("/update/{id}")
     public String update(@ModelAttribute("user") User user,@PathVariable("id") int id){
-        userService.update(id,user);
+        this.userService.update(id,user);
         return "redirect:/users";
 
     }
