@@ -1,6 +1,7 @@
 package web.dao;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import web.models.User;
 
@@ -9,7 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Component
+@Repository
 public class UserDAOImpl implements UserDAO {
     @PersistenceContext(unitName = "entityManagerFactory")
     private  EntityManager entityManager;
@@ -17,12 +18,34 @@ public class UserDAOImpl implements UserDAO {
     @Transactional
     @Override
     public List<User> index() {
-        return entityManager.createQuery("FROM users",User.class).getResultList();
+        List<User> users = entityManager.createQuery("FROM User", User.class).getResultList();
+        return users;
     }
 
     @Transactional
     @Override
     public void save(User user) {
         entityManager.persist(user);
+    }
+    @Transactional
+    @Override
+    public User show(int id) {
+        return entityManager.find(User.class,id);
+    }
+    @Transactional
+    @Override
+    public void update(int id, User updatedUser) {
+        User user = entityManager.find(User.class, id);
+
+        user.setName(updatedUser.getName());
+        user.setLastName(updatedUser.getLastName());
+        user.setAge(updatedUser.getAge());
+        user.setEmail(updatedUser.getEmail());
+        user.setAddress(updatedUser.getAddress());
+    }
+    @Transactional
+    @Override
+    public void delete(int id) {
+        entityManager.remove(entityManager.find(User.class,id));
     }
 }
